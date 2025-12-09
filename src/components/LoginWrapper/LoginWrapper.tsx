@@ -267,7 +267,7 @@ const CustomLogin = styled.div(({ theme }) => {
     "& .mainContainer": {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
-      width: "100%",
+      // width: "100%",
       maxWidth: "1208px",
       alignItems: "center",
       height: "100%",
@@ -281,7 +281,7 @@ const CustomLogin = styled.div(({ theme }) => {
     // Painel verde
     "& .decorationPanel": {
       position: "relative",
-      backgroundColor: "#01AB6A",
+      backgroundColor: "#214938",
       height: "100%",
       display: "flex",
       alignItems: "center",
