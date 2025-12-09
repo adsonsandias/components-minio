@@ -291,6 +291,9 @@ const CustomLogin = styled.div(({ theme }) => {
 
       "@media (max-width: 1100px)": {
         borderRadius: "20px 20px 0 0",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       },
       "@media (max-width: 800px)": {
         display: "none",
