@@ -244,99 +244,111 @@
 
 // Novo arquivo
 
-import React, { FC, useEffect, useState } from 'react';
-import get from 'lodash/get';
-import styled from 'styled-components';
-import { getGPUTier } from 'detect-gpu';
-import ApplicationLogo from '../ApplicationLogo/ApplicationLogo';
-import Grid from '../Grid/Grid';
-import { LoginWrapperProps } from './LoginWrapper.types';
-import { breakPoints } from '../../global/utils';
+import React, { FC, useEffect, useState } from "react";
+import get from "lodash/get";
+import styled from "styled-components";
+import { getGPUTier } from "detect-gpu";
+import ApplicationLogo from "../ApplicationLogo/ApplicationLogo";
+import Grid from "../Grid/Grid";
+import { LoginWrapperProps } from "./LoginWrapper.types";
+import { breakPoints } from "../../global/utils";
 
-const bgVideo = require('../assets/video/videoBG.mp4');
-const poster = require('../assets/background/loginAnimationPoster.png');
+const bgVideo = require("../assets/video/videoBG.mp4");
+const poster = require("../assets/background/loginAnimationPoster.png");
 
 const CustomLogin = styled.div(({ theme }) => {
   return {
-    '& .main': {
-      height: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+    "& .main": {
+      height: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
-    '& .mainContainer': {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      width: '100%',
-      maxWidth: '1208px',
-      alignItems: 'center',
+    "& .mainContainer": {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      width: "100%",
+      maxWidth: "1208px",
+      alignItems: "center",
 
-      '@media (max-width: 1100px)': {
-        padding: '20px',
-        gridTemplateColumns: '1fr',
+      "@media (max-width: 1100px)": {
+        padding: "20px",
+        gridTemplateColumns: "1fr",
       },
     },
-    '& .decorationPanel': {
-      position: 'relative',
-      backgroundColor: '#01AB6A',
-      height: '100%',
-      display: 'grid',
-      alignItems: 'center',
-      borderRadius: '20px 0px 0px 20px',
-      width: '100%',
-      maxWidth: '608px',
-
-      '@media (max-width: 800px)': {
-        display: 'none',
+    "& .decorationPanel": {
+      position: "relative",
+      backgroundColor: "#01AB6A",
+      height: "100%",
+      display: "grid",
+      alignItems: "center",
+      borderRadius: "20px 0px 0px 20px",
+      width: "100%",
+      maxWidth: "608px",
+      "@media (max-width: 1100px)": {
+        borderRadius: "20px 20px 0px 0px",
       },
-      '& .promoContainer': {
-        '& .promoInfo': {
-          padding: '30px',
-          '& img': {
-            width: '584px',
+
+      "@media (max-width: 800px)": {
+        display: "none",
+      },
+      "& .promoContainer": {
+        "& .promoInfo": {
+          padding: "30px",
+          "@media (max-width: 1100px)": {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          },
+          "& img": {
+            // width: '584px',
+            width: "100%",
           },
         },
       },
     },
-    '& .formPanel': {
-      backgroundColor: get(theme, 'login.formBG', '#fff'),
+    "& .formPanel": {
+      backgroundColor: get(theme, "login.formBG", "#fff"),
       [`@media (min-width: ${get(
         breakPoints,
-        'xs',
-        0,
-      )}px) and (max-width: ${get(breakPoints, 'md', 0)}px)`]: {
-        maxWidth: '100%',
+        "xs",
+        0
+      )}px) and (max-width: ${get(breakPoints, "md", 0)}px)`]: {
+        maxWidth: "100%",
       },
-      borderRadius: '0px 20px 20px 0px',
-      padding: '60px',
-      border: '1px solid #e7ecff',
-      '& .title': {
-        color: '#01AB6A',
-        marginTop: '0px',
-        marginBottom: '0px',
+      borderRadius: "0px 20px 20px 0px",
+      padding: "60px",
+      border: "1px solid #e7ecff",
+      "@media (max-width: 1100px)": {
+        borderRadius: "0px 0px 20px 20px",
       },
-      '& .formContainer': {
-        paddingTop: '40px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        '& .form': {
-          '& form': {
-            width: '100%',
+      "& .title": {
+        color: "#01AB6A",
+        marginTop: "0px",
+        marginBottom: "0px",
+      },
+      "& .formContainer": {
+        paddingTop: "40px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        "& .form": {
+          "& form": {
+            width: "100%",
           },
         },
-        '& .footer': {
-          display: 'flex',
-          justifyContent: 'space-between',
+        "& .footer": {
+          display: "flex",
+          justifyContent: "space-between",
 
-          '& a': {
-            marginTop: '30px',
+          "& a": {
+            marginTop: "30px",
           },
         },
-        '& .footer, & .footer a': {
-          color: get(theme, 'login.footerElements', '#000'),
-          fontSize: '14px',
-          textDecoration: 'none',
+        "& .footer, & .footer a": {
+          color: get(theme, "login.footerElements", "#000"),
+          fontSize: "14px",
+          textDecoration: "none",
         },
       },
     },
@@ -366,34 +378,34 @@ const LoginWrapper: FC<LoginWrapperProps> = ({
   return (
     <CustomLogin
       style={{
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f6f9ff',
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#f6f9ff",
       }}
     >
-      <Grid container className={'mainContainer'} wrap={'nowrap'}>
-        <Grid item xs={'hidden'} sm={'hidden'} md className={'decorationPanel'}>
+      <Grid container className={"mainContainer"} wrap={"nowrap"}>
+        <Grid item xs={"hidden"} sm={"hidden"} md className={"decorationPanel"}>
           {(promoInfo || promoHeader) && (
-            <Grid item className={'promoContainer'}>
-              <Grid item className={'promoInfo'}>
+            <Grid item className={"promoContainer"}>
+              <Grid item className={"promoInfo"}>
                 {promoInfo}
               </Grid>
             </Grid>
           )}
         </Grid>
-        <Grid item xs={12} className={'formPanel'}>
+        <Grid item xs={12} className={"formPanel"}>
           <Grid container>
             <Grid item xs={12}>
-              <h1 className={'title'}>Login</h1>
+              <h1 className={"title"}>Login</h1>
             </Grid>
-            <Grid item xs={12} className={'formContainer'}>
-              <Grid item xs className={'form'}>
+            <Grid item xs={12} className={"formContainer"}>
+              <Grid item xs className={"form"}>
                 {form}
               </Grid>
               {formFooter && (
-                <Grid item xs className={'footer'}>
+                <Grid item xs className={"footer"}>
                   {formFooter}
                 </Grid>
               )}
