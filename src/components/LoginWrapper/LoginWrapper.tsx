@@ -285,6 +285,7 @@ const CustomLogin = styled.div(({ theme }) => {
       borderRadius: "20px 0px 0px 20px",
       width: "100%",
       maxWidth: "608px",
+
       "@media (max-width: 1100px)": {
         borderRadius: "20px 20px 0px 0px",
       },
