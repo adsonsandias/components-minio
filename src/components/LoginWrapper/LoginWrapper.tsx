@@ -244,6 +244,9 @@
 
 // Novo arquivo
 
+// Ajuste completo do arquivo LoginWrapper corrigido
+// Conversão e limpeza da estrutura mantendo funcionalidade e eliminando erros
+
 import React, { FC, useEffect, useState } from "react";
 import get from "lodash/get";
 import styled from "styled-components";
@@ -256,106 +259,108 @@ import { breakPoints } from "../../global/utils";
 const bgVideo = require("../assets/video/videoBG.mp4");
 const poster = require("../assets/background/loginAnimationPoster.png");
 
+// =============================
+// CSS PRINCIPAL (CustomLogin)
+// =============================
 const CustomLogin = styled.div(({ theme }) => {
   return {
-    "& .main": {
-      height: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
     "& .mainContainer": {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       width: "100%",
       maxWidth: "1208px",
       alignItems: "center",
+      height: "100%",
 
       "@media (max-width: 1100px)": {
         padding: "20px",
         gridTemplateColumns: "1fr",
       },
     },
+
+    // Painel verde
     "& .decorationPanel": {
       position: "relative",
       backgroundColor: "#01AB6A",
       height: "100%",
-      display: "grid",
+      display: "flex",
       alignItems: "center",
-      borderRadius: "20px 0px 0px 20px",
-      width: "100%",
+      justifyContent: "center",
+      borderRadius: "20px 0 0 20px",
       maxWidth: "608px",
 
       "@media (max-width: 1100px)": {
-        borderRadius: "20px 20px 0px 0px",
+        borderRadius: "20px 20px 0 0",
       },
-
       "@media (max-width: 800px)": {
         display: "none",
       },
+
       "& .promoContainer": {
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+
         "& .promoInfo": {
           padding: "30px",
-          "@media (max-width: 1100px)": {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          },
+          textAlign: "center",
+
           "& img": {
-            // width: '584px',
             width: "100%",
           },
         },
       },
     },
+
+    // Painel Branco (Formulário)
     "& .formPanel": {
       backgroundColor: get(theme, "login.formBG", "#fff"),
-      [`@media (min-width: ${get(
-        breakPoints,
-        "xs",
-        0
-      )}px) and (max-width: ${get(breakPoints, "md", 0)}px)`]: {
-        maxWidth: "100%",
-      },
-      borderRadius: "0px 20px 20px 0px",
+      borderRadius: "0 20px 20px 0",
       padding: "60px",
       border: "1px solid #e7ecff",
+
       "@media (max-width: 1100px)": {
-        borderRadius: "0px 0px 20px 20px",
+        borderRadius: "0 0 20px 20px",
       },
+
       "& .title": {
         color: "#01AB6A",
-        marginTop: "0px",
-        marginBottom: "0px",
+        margin: 0,
       },
+
       "& .formContainer": {
         paddingTop: "40px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+
         "& .form": {
+          width: "100%",
           "& form": {
             width: "100%",
           },
         },
+
         "& .footer": {
+          marginTop: "20px",
           display: "flex",
           justifyContent: "space-between",
+          width: "100%",
 
           "& a": {
-            marginTop: "30px",
+            color: get(theme, "login.footerElements", "#000"),
+            fontSize: "14px",
+            textDecoration: "none",
           },
-        },
-        "& .footer, & .footer a": {
-          color: get(theme, "login.footerElements", "#000"),
-          fontSize: "14px",
-          textDecoration: "none",
         },
       },
     },
   };
 });
 
+// =============================
+// COMPONENTE PRINCIPAL
+// =============================
 const LoginWrapper: FC<LoginWrapperProps> = ({
   logoProps,
   form,
@@ -372,7 +377,6 @@ const LoginWrapper: FC<LoginWrapperProps> = ({
         const gpuTier = await getGPUTier();
         setGPUAvailable(!!gpuTier.gpu && gpuTier.tier >= 2);
       }
-      return;
     })();
   }, [backgroundAnimation]);
 
@@ -387,6 +391,7 @@ const LoginWrapper: FC<LoginWrapperProps> = ({
       }}
     >
       <Grid container className={"mainContainer"} wrap={"nowrap"}>
+        {/* Painel Esquerdo */}
         <Grid item xs={"hidden"} sm={"hidden"} md className={"decorationPanel"}>
           {(promoInfo || promoHeader) && (
             <Grid item className={"promoContainer"}>
@@ -396,15 +401,20 @@ const LoginWrapper: FC<LoginWrapperProps> = ({
             </Grid>
           )}
         </Grid>
+
+        {/* Painel Direito - Form */}
         <Grid item xs={12} className={"formPanel"}>
           <Grid container>
             <Grid item xs={12}>
               <h1 className={"title"}>Login</h1>
             </Grid>
+
+            {/* Formulário */}
             <Grid item xs={12} className={"formContainer"}>
               <Grid item xs className={"form"}>
                 {form}
               </Grid>
+
               {formFooter && (
                 <Grid item xs className={"footer"}>
                   {formFooter}
